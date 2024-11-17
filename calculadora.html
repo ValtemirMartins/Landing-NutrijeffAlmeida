@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Calculadora de Peso Ideal</title>
+</head>
+
+<body class="body-calculadora">
+
+    <div class="calculator">
+
+        <!-- Página 1: Categoria -->
+        <div id="page1">
+            <h1>Calcule seu peso Ideal</h1>
+            <br>
+            <h2>Como esta seu condicionamento atual:</h2>
+            <div class="input-page1">
+                <form id="categoryForm" onsubmit="return false;">
+                    <button type="button" class="submit-btn" onclick="selectCategory('aboveIdeal', this)">MUITO ACIMA DO PESO (Mifflin-StJoe)</button><br>
+                    <button type="button" class="submit-btn" onclick="selectCategory('idealWeight', this)">PROXIMO DO PESO IDEAL (Harris-Benedict)</button><br>
+                    <button type="button" class="submit-btn" onclick="selectCategory('underIdeal', this)">ATLETA-MUITO ATIVO (Tinsley)</button><br>
+                </form>
+            </div>
+            
+            <div class="nav-buttons">
+                <button id="btnNext1" onclick="goToPage(2)" disabled>Avançar</button>
+            </div>
+        </div>
+
+        <!-- Página 2: Gênero, Idade, Altura e Peso -->
+        <div id="page2" class="hidden">
+            <div class="input-page2">
+                <h1>Preencha com suas Informações: </h1>
+                <br>
+                <h2>Gênero:</h2>
+                <input type="radio" name="gender" value="male" checked onclick="enableNext2()"> Masculino<br>
+                <input type="radio" name="gender" value="female" onclick="enableNext2()"> Feminino<br>
+            </div>
+
+            <div class="input-page2">
+                <label>Idade: <span id="ageValue">36</span> anos</label>
+                <input type="range" id="age" min="19" max="80" value="36" oninput="updateSliderValue('age', 'ageValue')"
+                    onchange="enableNext2()">
+            </div>
+
+            <div class="input-page2">
+                <label>Altura: <span id="heightValue">167</span> cm</label>
+                <input type="range" id="height" min="130" max="220" value="167"
+                    oninput="updateSliderValue('height', 'heightValue')" onchange="enableNext2()">
+            </div>
+
+            <div class="input-page2">
+                <label>Peso: <span id="weightValue">85</span> kg</label>
+                <input type="range" id="weight" min="40" max="180" value="85"
+                    oninput="updateSliderValue('weight', 'weightValue')" onchange="enableNext2()">
+            </div>
+
+            <div class="nav-buttons">
+                <button onclick="goToPage(1)">Voltar</button>
+                <button id="btnNext2" onclick="goToPage(3)" disabled>Avançar</button>
+            </div>
+        </div>
+
+        <!-- Página 3: Nível de Atividade -->
+        <div id="page3" class="hidden">
+            <div class="input-page3">
+                <h1>Qual seu Nivel de atividade atual?</h1>
+                <br>
+                <h2>Nível de Atividade:</h2>
+                    <form id="activityForm" onsubmit="return false;">
+                        <button type="button" class="submit-btn" onclick="selectActivity(1.2, this)"><h3>Sedentario(FA 1.2)</h3> <p>Pouco ou nenhum exercício fisicos</p></button>
+                        <button type="button" class="submit-btn" onclick="selectActivity(1.375, this)"><h3>Pouco Ativo (FA=1.375)</h3><p>Exercício fisico de 1 a 3 dias por semana</p></button><br>
+                        <button type="button" class="submit-btn" onclick="selectActivity(1.55, this)"><h3>Moderadamente Ativo (FA=1.55)</h3><p>Exercício fisico de 3 a 5 dias por semana</p></button><br>
+                        <button type="button" class="submit-btn" onclick="selectActivity(1.725, this)"><h3>Muito Ativo (FA=1.725)</h3><p>Exercício fisico de 6 a 7 dias por semana</p></button><br>
+                    </form>
+                </div>
+                
+
+            <div class="nav-buttons">
+                <button onclick="goToPage(2)">Voltar</button>
+                <button id="btnNext3" onclick="calculate()" disabled>Calcular</button>
+            </div>
+        </div>
+
+        <!-- Página 4: Resultados -->
+        <div id="page4" class="hidden">
+            <h2>Pronto, aqui esta sua avaliação!!</h2>
+            <div class="result" id="result"></div>
+            <div class="nav-buttons">
+                <button onclick="goToPage(3)">Voltar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedCategory = '', selectedGender = '', selectedActivity = '', age, height, weight;
+
+        function selectCategory(category, btn) {
+            selectedCategory = category;
+            document.querySelectorAll('button[name="category"]').forEach(button => button.classList.remove('selected'));
+            btn.classList.add('selected');
+            document.getElementById('btnNext1').disabled = false;
+        }
+
+        function enableNext2() {
+            selectedGender = document.querySelector('input[name="gender"]:checked').value;
+            age = parseInt(document.getElementById('age').value);
+            height = parseInt(document.getElementById('height').value);
+            weight = parseInt(document.getElementById('weight').value);
+            document.getElementById('btnNext2').disabled = !(selectedGender && age && height && weight);
+        }
+
+        function selectActivity(activityFactor, btn) {
+            selectedActivity = activityFactor;
+            document.querySelectorAll('button[name="activity"]').forEach(button => button.classList.remove('selected'));
+            btn.classList.add('selected');
+            document.getElementById('btnNext3').disabled = false;
+        }
+
+        function updateSliderValue(sliderId, labelId) {
+            document.getElementById(labelId).textContent = document.getElementById(sliderId).value;
+        }
+
+        function calculate() {
+    let tmb, activityFactor = selectedActivity;
+
+    // Verifica a categoria selecionada
+    if (selectedCategory === 'underIdeal') { // Tinsley para "ATLETA-MUITO ATIVO"
+        tmb = (24.8 * weight) + 10;
+    } else if (selectedCategory === 'idealWeight') { // Harris-Benedict atualizado para "PRÓXIMO DO PESO IDEAL"
+        if (selectedGender === 'male') {
+            tmb = 88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age);
+        } else {
+            tmb = 447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age);
+        }
+    } else { // Mifflin-St Jeor para outras categorias
+        if (selectedGender === 'male') {
+            tmb = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+        } else {
+            tmb = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+        }
+    }
+
+    let totalCalories = tmb * activityFactor;
+    let proteinGoal = weight * 2;
+    let caloriesToLose = totalCalories - 500;
+    let caloriesToGain = totalCalories + 500;
+
+    document.getElementById('result').innerHTML = `
+        <div class="result-item">
+            <div class="icon"><img src="https://cdn-icons-png.freepik.com/256/11852/11852487.png?uid=R114948803&ga=GA1.1.1322107807.1730765371&semt=ais_hybrid" alt="Ícone TMB"></div>
+            <div class="text"><strong>Taxa Metabólica Basal (TMB):</strong> ${tmb.toFixed(2)} kcal</div>
+        </div>
+        <div class="result-item">
+            <div class="icon"><img src="https://cdn-icons-png.flaticon.com/512/2836/2836504.png" alt="Ícone Proteína"></div>
+            <div class="text"><strong>Meta diária de proteínas:</strong> ${proteinGoal.toFixed(2)} g</div>
+        </div>
+        <div class="result-item">
+            <div class="icon"><img src="https://cdn-icons-png.flaticon.com/512/11437/11437937.png" alt="Ícone Emagrecer"></div>
+            <div class="text"><strong>Calorias para emagrecer:</strong> ${caloriesToLose.toFixed(2)} kcal</div>
+        </div>
+        <div class="result-item">
+            <div class="icon"><img src="https://cdn-icons-png.flaticon.com/128/3491/3491798.png" alt="Ícone Manter Peso"></div>
+            <div class="text"><strong>Gasto energético total / Manter peso:</strong> ${totalCalories.toFixed(2)} kcal</div>
+        </div>
+        <div class="result-item">
+            <div class="icon"><img src="https://cdn-icons-png.flaticon.com/128/2788/2788935.png" alt="Ícone Hipertrofia"></div>
+            <div class="text"><strong>Calorias para hipertrofia:</strong> ${caloriesToGain.toFixed(2)} kcal</div>
+        </div>
+    `;
+    goToPage(4);
+}
+
+
+        function goToPage(page) {
+            document.querySelectorAll('.calculator > div').forEach(div => div.classList.add('hidden'));
+            document.getElementById('page' + page).classList.remove('hidden');
+        }
+    </script>
+
+</body>
+
+</html>

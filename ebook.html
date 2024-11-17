@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Venda de E-Book</title>
+  <style>
+    /* Estilização geral */
+    body {
+      font-family: Arial, sans-serif;
+      color: white;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://img.freepik.com/fotos-gratis/estilo-grunge-interior-com-piso-de-placa-de-metal_1048-2914.jpg');
+      background-size: cover;
+      background-position: center;
+      border-left: 15px solid rgba(255, 255, 255, 0.7);
+  border-right: 15px solid rgba(255, 255, 255, 0.7);
+    }
+    /* Estilização do título */
+    .video-title {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 2em;
+      font-weight: bold;
+      color: #ffcc00; /* Destaque no título */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Seção dos vídeos */
+    .video-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+      height: 60vh; /* Usa 60% da altura da tela */
+      overflow: hidden;
+      position: relative;
+    }
+
+    .video-container video {
+      width: 45%;
+      height: 90%;
+      object-fit: cover;
+      border: 3px solid white;
+      border-radius: 10px;
+    }
+
+    /* Estilização do título */
+    .carousel-title {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #ffcc00; /* Destaque no título */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Seção do carrossel */
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.7);
+      align-items: center;
+      height: 200px; /* Altura menor */
+    }
+
+    .carousel img {
+      text-align: center;
+      flex: 0 0 auto;
+      width: 160px; /* Largura menor */
+      height: 200px; /* Altura menor */
+      object-fit: cover;
+      border-radius: 8px;
+      border: 3px solid white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Estilo para remover scrollbar (opcional) */
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Seção de vendas */
+    .sales-section {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .sales-section h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .sales-section p {
+      font-size: 1.2em;
+      margin: 20px 0;
+    }
+
+    .sales-section a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 15px 25px;
+      background-color: #2290ff;
+      color: white;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 25px;
+      transition: background 0.3s ease;
+    }
+
+    .sales-section a:hover {
+      background-color: #1f4f9c;
+    }
+  </style>
+</head>
+<body>
+ <!-- Título acima dos vídeos -->
+ <h1 class="video-title">Transforme Sua Vida com Nosso Conteúdo Exclusivo</h1>
+
+  <!-- Vídeos no topo -->
+  <div class="video-container">
+    <video muted loop controls>
+      <source src="" type="video/mp4">
+      Seu navegador não suporta o elemento de vídeo.
+    </video>
+    <video muted loop controls>
+      <source src="" type="video/mp4">
+      Seu navegador não suporta o elemento de vídeo.
+    </video>
+  </div>
+
+  <!-- Título acima do carrossel -->
+  <h1 class="carousel-title">Venha você também e adquira esses resultados</h1>
+
+  <!-- Carrossel de imagens -->
+  <div class="carousel">
+    <img src="./img/IMG_01.JPG" alt="Antes 1">
+    <img src="./img/IMG_02.JPEG" alt="Depois 1">
+    <img src="./img/IMG_03.JPG" alt="Antes 2">
+    <img src="./img/IMG_04.JPG" alt="Depois 2">
+    <img src="./img/IMG_05.JPG" alt="Antes 3">
+    <img src="./img/IMG_06.JPEG" alt="Depois 3">
+    <img src="./img/IMG_07.JPG" alt="Antes 4">
+    <img src="./img/IMG_08.JPG" alt="Depois 4">
+    <img src="./img/IMG_09.JPEG" alt="Antes 5">
+    <img src="./img/IMG_10.JPEG" alt="Depois 5">
+    <img src="./img/IMG_11.JPEG" alt="Antes 6">
+    <img src="./img/IMG_01.JPG" alt="Depois 6">
+  
+  </div>
+
+  <!-- Seção de vendas -->
+  <div class="sales-section">
+    <section>
+      <h1>ADQUIRA SEU E-BOOK AGORA!</h1>
+      <p>Descubra dicas incríveis e conhecimentos exclusivos no nosso e-book que vai transformar sua experiência.</p>
+      <a href="https://www.estantevirtual.com.br/">CLIQUE AQUI E COMPRE SEU E-BOOK</a>
+    </section>
+  </div>
+
+  <script>
+    const carousel = document.querySelector('.carousel');
+
+    function autoScroll() {
+      carousel.scrollLeft += 1;
+
+      if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth) {
+        carousel.scrollLeft = 0;
+      }
+    }
+
+    setInterval(autoScroll, 20);
+  </script>
+</body>
+</html>

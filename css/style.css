@@ -1,0 +1,411 @@
+* {
+  font-family: "Cormorant Garamond", serif;
+  margin: 0;
+  padding: 0;
+  /* font-style: normal; */
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  font-family: "Cormorant Garamond", serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #111419;
+}
+
+/* Estilização do Container Principal */
+.card-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #181818;
+  overflow: hidden;
+  text-align: center;
+  padding: 20px;
+  margin: 0;
+  border-left: 15px solid rgba(255, 255, 255, 0.7);
+  border-right: 15px solid rgba(255, 255, 255, 0.7);
+  background-image: url('https://img.freepik.com/fotos-gratis/estilo-grunge-interior-com-piso-de-placa-de-metal_1048-2914.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+              0 0 20px rgba(255, 255, 255, 0.3),
+              0 0 40px rgba(255, 255, 255, 0.1);
+}
+
+.card-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(19, 17, 17, 0.5);
+  border-radius: 50px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-container * {
+  position: relative;
+  z-index: 2;
+}
+
+.header {
+  padding: auto;
+}
+
+.profile-photo {
+  width: 300px;
+  height: auto;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin-top: 25px;
+  border-radius: 50%;
+  border: 12px solid rgba(255, 255, 255, 0.3);
+}
+
+.header h1 {
+  font-size: 2.5em;
+  color: rgba(255, 255, 255, 0.998);
+  margin-top: 10px;
+}
+
+.subtitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.2em;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.consulta, .venda-ebook, .calculadora, .Site, .texto-novidades {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  padding: 10px 20px;
+  width: 100%;
+  max-width: 350px;
+  height: 80px;
+  margin-bottom: 20px;
+  /*background-image: url('');*/
+  background-color: rgba(24, 24, 24, 0.8);
+  border-radius: 50px;
+  border: 6px solid rgba(255, 255, 255, 0.6);
+  animation: borderAnimation 3s infinite alternate;
+}
+
+@keyframes borderAnimation {
+  0% {
+    border-color: rgb(255, 255, 255);
+    transform: scale(1);
+  }
+  50% {
+    border-color: rgba(80, 83, 79, 0.705);
+    transform: scale(1.08);
+  }
+  100% {
+    border-color: rgb(255, 255, 255);
+    transform: scale(1);
+  }
+}
+
+.consulta a, .venda-ebook a, .calculadora a, .Site a {
+  text-decoration: none;
+}
+
+.consulta h2, .venda-ebook h2, .calculadora h2, .Site h2 {
+  font-size: 1.4em;
+  color: rgba(255, 255, 255, 0.998);
+}
+
+.social-icon {
+  margin: 20px auto;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  vertical-align: middle;
+  margin-right: 20px;
+}
+
+.logo-footer {
+  width: 200px;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+  margin-bottom: 50px;
+}
+
+
+/* Responsividade para dispositivos móveis */
+@media screen and (max-width: 768px) {
+  .card-container {
+    padding: 10px;
+    border-left: 10px solid rgba(255, 255, 255, 0.7);
+    border-right: 10px solid rgba(255, 255, 255, 0.7);
+  }
+
+  .profile-photo {
+    width: 200px;
+    border-width: 8px;
+  }
+
+  .header h1 {
+    font-size: 2em;
+  }
+
+  .consulta, .venda-ebook, .calculadora, .Site, .texto-novidades {
+    width: 90%;
+    height: auto;
+    padding: 8px 15px;
+    font-size: 1em;
+  }
+
+  .consulta h2, .venda-ebook h2, .calculadora h2, .Site h2 {
+    font-size: 1.2em;
+  }
+
+  .social-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .logo-footer {
+    width: 150px;
+  }
+}
+
+.body-calculadora {
+  border-left: 15px solid rgba(255, 255, 255, 0.7);
+  border-right: 15px solid rgba(255, 255, 255, 0.7);
+  font-family: "Cormorant Garamond", serif;
+  background-image: url('https://img.freepik.com/fotos-gratis/estilo-grunge-interior-com-piso-de-placa-de-metal_1048-2914.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+              0 0 20px rgba(255, 255, 255, 0.3),
+              0 0 40px rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+.body-calculadora::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(19, 17, 17, 0.5);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.body-calculadora * {
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+}
+h2 {
+  /* text-align: center; */
+  color: #ffffff;
+}
+
+.calculator {
+  background-image: url('https://img.freepik.com/fotos-gratis/estilo-grunge-interior-com-piso-de-placa-de-metal_1048-2914.jpg');
+  margin: 60px;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgb(255, 255, 255);
+  width: 100%;
+  max-width: 700px;
+  cursor: pointer;
+}
+
+
+.input-page1{
+  text-align: center;
+  color: white;
+  width: 100%;
+  margin-bottom: 50px;
+  font-weight: bold;
+}
+
+.input-page2{
+  color: white;
+  width: 100%;
+  margin-bottom: 45px;
+  font-weight: bold;
+}
+.input-page2 label {
+  font-size: 1.5em; /* Aumenta o tamanho da fonte */
+  color: white; /* Ajusta a cor para melhor visibilidade */
+  font-weight: bold;
+}
+
+.input-page2 span {
+  font-size: 1.2em; /* Aumenta o tamanho do texto do valor exibido ao lado do slider */
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+.input-page3 {
+  text-align: center;
+  color: white;
+  width: 100%;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.submit-btn {
+  color: white;
+  text-align: center;
+  border: 5px solid rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0, 0.672);
+  border-radius: 25px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 400px;
+  height: 50px;
+  animation: borderAnimation 3s infinite alternate;
+}
+.submit-btn.selected {
+  background-color: blue; /* Cor de fundo quando selecionado */
+  color: white; /* Cor do texto */
+}
+
+.submit-btn:hover {
+  background-color: #006ba4; /* Cor de fundo ao passar o mouse */
+}
+
+
+/* Estilo principal da área de resultados */
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-size: 18px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Estilo para cada cartão de resultado */
+.result-item {
+  display: flex;
+  align-items: center;
+  background-color: #181818;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+}
+
+.result-item:hover {
+  transform: scale(1.02);
+}
+
+/* Ícone para cada item de resultado */
+.result-item .icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+}
+
+.result-item .icon img {
+  width: 100%;
+  height: auto;
+}
+
+/* Texto do resultado */
+.result-item .text {
+  text-align: left;
+}
+
+.result-item .text strong {
+  display: block;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+}
+
+/* Centralizando e criando espaçamento entre os botões */
+.nav-buttons {
+  display: flex;
+  flex-direction: column;  /* Organiza os botões verticalmente */
+  align-items: center;  /* Centraliza os botões horizontalmente */
+  gap: 15px;  /* Adiciona um espaço de 15px entre os botões */
+  margin: 20px 0;  /* Espaçamento superior e inferior */
+  cursor: pointer;
+}
+
+.calculate-btn,
+.nav-buttons button {
+  background-color: rgba(0, 0, 0, 0.672);
+  color: white;
+  border: 5px solid rgb(255, 255, 255);
+  border-radius: 25px;
+  width: 100%;
+  max-width: 200px;
+  height: 40px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Efeito ao passar o mouse */
+.nav-buttons button:hover {
+  background-color: #006ba4;
+  transform: scale(1.05);
+}
+
+/* Efeito ao clicar no botão */
+.nav-buttons button:active {
+  background-color: black;
+  transform: scale(0.98);
+}
+
+/* Estilo para botões desabilitados */
+.nav-buttons button:disabled {
+  background-color: rgba(0, 0, 0, 0.672);
+  color: white;
+  border: 5px solid rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+}
+
+.hidden {
+  display: none;
+}
+
+
+@media screen and (max-width: 768px) {
+  .calculator {
+    margin: 20px;
+    padding: 20px;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    font-size: 14px;
+  }
+  
+  .calculate-btn,
+  .nav-buttons button {
+    font-size: 14px;
+    padding: 8px;
+  }
+ 
+}

@@ -20,12 +20,16 @@
             <h2>Como esta seu condicionamento atual:</h2>
             <div class="input-page1">
                 <form id="categoryForm" onsubmit="return false;">
-                    <button type="button" class="submit-btn" onclick="selectCategory('aboveIdeal', this)">MUITO ACIMA DO PESO (Mifflin-StJoe)</button><br>
-                    <button type="button" class="submit-btn" onclick="selectCategory('idealWeight', this)">PROXIMO DO PESO IDEAL (Harris-Benedict)</button><br>
-                    <button type="button" class="submit-btn" onclick="selectCategory('underIdeal', this)">ATLETA-MUITO ATIVO (Tinsley)</button><br>
+                    <button type="button" class="submit-btn" name="category"
+                        onclick="selectCategory('aboveIdeal', this)">MUITO ACIMA DO PESO (Mifflin-StJoe)</button><br>
+                    <button type="button" class="submit-btn" name="category"
+                        onclick="selectCategory('idealWeight', this)">PROXIMO DO PESO IDEAL
+                        (Harris-Benedict)</button><br>
+                    <button type="button" class="submit-btn" name="category"
+                        onclick="selectCategory('underIdeal', this)">ATLETA-MUITO ATIVO (Tinsley)</button><br>
                 </form>
             </div>
-            
+
             <div class="nav-buttons">
                 <button id="btnNext1" onclick="goToPage(2)" disabled>Avançar</button>
             </div>
@@ -71,14 +75,18 @@
                 <h1>Qual seu Nivel de atividade atual?</h1>
                 <br>
                 <h2>Nível de Atividade:</h2>
-                    <form id="activityForm" onsubmit="return false;">
-                        <button type="button" class="submit-btn" onclick="selectActivity(1.2, this)"><h3>Sedentario(FA 1.2)</h3> <p>Pouco ou nenhum exercício fisicos</p></button>
-                        <button type="button" class="submit-btn" onclick="selectActivity(1.375, this)"><h3>Pouco Ativo (FA=1.375)</h3><p>Exercício fisico de 1 a 3 dias por semana</p></button><br>
-                        <button type="button" class="submit-btn" onclick="selectActivity(1.55, this)"><h3>Moderadamente Ativo (FA=1.55)</h3><p>Exercício fisico de 3 a 5 dias por semana</p></button><br>
-                        <button type="button" class="submit-btn" onclick="selectActivity(1.725, this)"><h3>Muito Ativo (FA=1.725)</h3><p>Exercício fisico de 6 a 7 dias por semana</p></button><br>
-                    </form>
-                </div>
-                
+                <form id="activityForm" onsubmit="return false;">
+                    <button type="button" class="submit-btn" name="activity"
+                        onclick="selectActivity(1.2, this)">Sedentario(FA 1.2)</button>
+                    <button type="button" class="submit-btn" name="activity" onclick="selectActivity(1.375, this)">Pouco
+                        Ativo (FA=1.375)</button><br>
+                    <button type="button" class="submit-btn" name="activity"
+                        onclick="selectActivity(1.55, this)">Moderadamente Ativo (FA=1.55)</button><br>
+                    <button type="button" class="submit-btn" name="activity" onclick="selectActivity(1.725, this)">Muito
+                        Ativo (FA=1.725)</button><br>
+                </form>
+            </div>
+
 
             <div class="nav-buttons">
                 <button onclick="goToPage(2)">Voltar</button>
@@ -99,13 +107,17 @@
     <script>
         let selectedCategory = '', selectedGender = '', selectedActivity = '', age, height, weight;
 
+        // Seleciona categoria e muda a cor do botão
         function selectCategory(category, btn) {
             selectedCategory = category;
+            // Remove a classe 'selected' de todos os botões de categoria
             document.querySelectorAll('button[name="category"]').forEach(button => button.classList.remove('selected'));
+            // Adiciona a classe 'selected' ao botão clicado
             btn.classList.add('selected');
             document.getElementById('btnNext1').disabled = false;
         }
 
+        // Habilita o botão de avançar na página 2
         function enableNext2() {
             selectedGender = document.querySelector('input[name="gender"]:checked').value;
             age = parseInt(document.getElementById('age').value);
@@ -114,9 +126,12 @@
             document.getElementById('btnNext2').disabled = !(selectedGender && age && height && weight);
         }
 
+        // Seleciona atividade e muda a cor do botão
         function selectActivity(activityFactor, btn) {
             selectedActivity = activityFactor;
+            // Remove a classe 'selected' de todos os botões de atividade
             document.querySelectorAll('button[name="activity"]').forEach(button => button.classList.remove('selected'));
+            // Adiciona a classe 'selected' ao botão clicado
             btn.classList.add('selected');
             document.getElementById('btnNext3').disabled = false;
         }
@@ -125,32 +140,33 @@
             document.getElementById(labelId).textContent = document.getElementById(sliderId).value;
         }
 
+
         function calculate() {
-    let tmb, activityFactor = selectedActivity;
+            let tmb, activityFactor = selectedActivity;
 
-    // Verifica a categoria selecionada
-    if (selectedCategory === 'underIdeal') { // Tinsley para "ATLETA-MUITO ATIVO"
-        tmb = (24.8 * weight) + 10;
-    } else if (selectedCategory === 'idealWeight') { // Harris-Benedict atualizado para "PRÓXIMO DO PESO IDEAL"
-        if (selectedGender === 'male') {
-            tmb = 88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age);
-        } else {
-            tmb = 447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age);
-        }
-    } else { // Mifflin-St Jeor para outras categorias
-        if (selectedGender === 'male') {
-            tmb = (10 * weight) + (6.25 * height) - (5 * age) + 5;
-        } else {
-            tmb = (10 * weight) + (6.25 * height) - (5 * age) - 161;
-        }
-    }
+            // Verifica a categoria selecionada
+            if (selectedCategory === 'underIdeal') { // Tinsley para "ATLETA-MUITO ATIVO"
+                tmb = (24.8 * weight) + 10;
+            } else if (selectedCategory === 'idealWeight') { // Harris-Benedict atualizado para "PRÓXIMO DO PESO IDEAL"
+                if (selectedGender === 'male') {
+                    tmb = 88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age);
+                } else {
+                    tmb = 447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age);
+                }
+            } else { // Mifflin-St Jeor para outras categorias
+                if (selectedGender === 'male') {
+                    tmb = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+                } else {
+                    tmb = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+                }
+            }
 
-    let totalCalories = tmb * activityFactor;
-    let proteinGoal = weight * 2;
-    let caloriesToLose = totalCalories - 500;
-    let caloriesToGain = totalCalories + 500;
+            let totalCalories = tmb * activityFactor;
+            let proteinGoal = weight * 2;
+            let caloriesToLose = totalCalories - 500;
+            let caloriesToGain = totalCalories + 500;
 
-    document.getElementById('result').innerHTML = `
+            document.getElementById('result').innerHTML = `
         <div class="result-item">
             <div class="icon"><img src="https://cdn-icons-png.freepik.com/256/11852/11852487.png?uid=R114948803&ga=GA1.1.1322107807.1730765371&semt=ais_hybrid" alt="Ícone TMB"></div>
             <div class="text"><strong>Taxa Metabólica Basal (TMB):</strong> ${tmb.toFixed(2)} kcal</div>
@@ -172,8 +188,8 @@
             <div class="text"><strong>Calorias para hipertrofia:</strong> ${caloriesToGain.toFixed(2)} kcal</div>
         </div>
     `;
-    goToPage(4);
-}
+            goToPage(4);
+        }
 
 
         function goToPage(page) {
